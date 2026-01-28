@@ -5,6 +5,7 @@ import br.com.vitordeazambuja.apicursos.course.repositories.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -30,14 +31,14 @@ public class CourseService {
 
         if (name != null){
             return this.courseRepository.findByName(name)
-                    .map(List::of)
-                    .orElse(List.of());
+                    .map(value -> List.of(value))
+                    .orElse(Collections.emptyList());
         }
 
         if (category != null){
             return this.courseRepository.findByCategory(category)
-                    .map(List::of)
-                    .orElse(List.of());
+                    .map(value -> List.of(value))
+                    .orElse(Collections.emptyList());
         }
 
         return this.courseRepository.findAll();
