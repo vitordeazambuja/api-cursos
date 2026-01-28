@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class CourseService {
@@ -42,5 +43,20 @@ public class CourseService {
         }
 
         return this.courseRepository.findAll();
+    }
+
+    public CourseEntity update(UUID id, CourseEntity courseEntity){
+        CourseEntity course = this.courseRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Curso nao encontrado"));
+
+        if(courseEntity.getName() != null){
+            course.setName(courseEntity.getName());
+        }
+
+        if(courseEntity.getCategory() != null){
+            course.setCategory(courseEntity.getCategory());
+        }
+
+        return this.courseRepository.save(course);
     }
 }

@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/cursos")
 public class CourseController {
@@ -27,6 +29,15 @@ public class CourseController {
     @GetMapping
     public ResponseEntity<Object> getAll(@RequestParam(required = false) String name, @RequestParam(required = false) String category){
         return ResponseEntity.ok().body(this.courseService.getAll(name, category));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> update(@PathVariable UUID id, @RequestBody CourseEntity courseEntity){
+        try{
+            return ResponseEntity.ok().body(this.courseService.update(id, courseEntity));
+        } catch (Exception e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
 }
