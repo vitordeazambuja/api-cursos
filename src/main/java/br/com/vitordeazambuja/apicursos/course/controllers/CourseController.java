@@ -40,4 +40,14 @@ public class CourseController {
         }
     }
 
+    @DeleteMapping("{id}")
+    public ResponseEntity<Object> delete(@PathVariable UUID id){
+        try{
+            courseService.delete(id);
+            return ResponseEntity.noContent().build();
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
 }

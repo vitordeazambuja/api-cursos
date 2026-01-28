@@ -19,7 +19,7 @@ public class CourseService {
         this.courseRepository
                 .findByName(courseEntity.getName())
                 .ifPresent((user)->{
-                    throw new RuntimeException("Curso ja existe");
+                    throw new RuntimeException("Curso ja existente");
                 });
         return this.courseRepository.save(courseEntity);
     }
@@ -58,5 +58,12 @@ public class CourseService {
         }
 
         return this.courseRepository.save(course);
+    }
+
+    public void delete(UUID id){
+        if(!this.courseRepository.existsById(id)){
+            throw new RuntimeException("Curso nao encontrado");
+        }
+        this.courseRepository.deleteById(id);
     }
 }
