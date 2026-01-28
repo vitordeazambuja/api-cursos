@@ -50,4 +50,13 @@ public class CourseController {
         }
     }
 
+    @PatchMapping("/{id}/active")
+    public ResponseEntity<Object> toggleActive(@PathVariable UUID id){
+        try{
+            return ResponseEntity.ok().body(this.courseService.toggleActive(id));
+        } catch (Exception e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
 }
