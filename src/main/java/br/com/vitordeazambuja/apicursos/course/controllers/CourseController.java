@@ -14,7 +14,7 @@ public class CourseController {
     @Autowired
     private CourseService courseService;
 
-    @PostMapping("/")
+    @PostMapping
     public ResponseEntity<Object> create(@RequestBody CourseEntity courseEntity){
         try{
             var result = this.courseService.create(courseEntity);
@@ -24,15 +24,9 @@ public class CourseController {
         }
     }
 
-    /* POSSIVEL FUTURA IMPLEMENTAÇÃO DO GET
-    @GetMapping("/")
-    public ResponseEntity<Object> get(HttpServletRequest request){
-        try{
-            return ResponseEntity.ok().body(request.getAttribute("courses"));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+    @GetMapping
+    public ResponseEntity<Object> getAll(@RequestParam(required = false) String name, @RequestParam(required = false) String category){
+        return ResponseEntity.ok().body(this.courseService.getAll(name, category));
     }
-     */
 
 }

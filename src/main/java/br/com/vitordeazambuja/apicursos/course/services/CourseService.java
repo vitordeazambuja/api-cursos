@@ -5,6 +5,8 @@ import br.com.vitordeazambuja.apicursos.course.repositories.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CourseService {
 
@@ -20,10 +22,24 @@ public class CourseService {
         return this.courseRepository.save(courseEntity);
     }
 
-    /* POSSIVEL FUTURA IMPLEMENTACAO DO GET
-    public Iterable<CourseEntity> getAll(){
+    public List<CourseEntity> getAll(String name, String category){
+
+        if(name != null && category != null){
+            return this.courseRepository.findByNameAndCategory(name, category);
+        }
+
+        if (name != null){
+            return this.courseRepository.findByName(name)
+                    .map(List::of)
+                    .orElse(List.of());
+        }
+
+        if (category != null){
+            return this.courseRepository.findByCategory(category)
+                    .map(List::of)
+                    .orElse(List.of());
+        }
+
         return this.courseRepository.findAll();
     }
-     */
-
 }
