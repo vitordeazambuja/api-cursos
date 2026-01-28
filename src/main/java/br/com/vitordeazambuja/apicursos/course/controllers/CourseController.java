@@ -5,6 +5,7 @@ import br.com.vitordeazambuja.apicursos.course.dto.UpdateCourseDTO;
 import br.com.vitordeazambuja.apicursos.course.entities.CourseEntity;
 import br.com.vitordeazambuja.apicursos.course.services.CourseService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +20,7 @@ public class CourseController {
     private CourseService courseService;
 
     @PostMapping
-    public ResponseEntity<Object> create(@RequestBody CreateCourseDTO dto){
+    public ResponseEntity<Object> create(@RequestBody @Valid CreateCourseDTO dto){
         try{
             var result = this.courseService.create(dto);
             return ResponseEntity.ok().body(result);
