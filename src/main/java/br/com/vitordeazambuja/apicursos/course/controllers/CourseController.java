@@ -1,5 +1,7 @@
 package br.com.vitordeazambuja.apicursos.course.controllers;
 
+import br.com.vitordeazambuja.apicursos.course.dto.CreateCourseDTO;
+import br.com.vitordeazambuja.apicursos.course.dto.UpdateCourseDTO;
 import br.com.vitordeazambuja.apicursos.course.entities.CourseEntity;
 import br.com.vitordeazambuja.apicursos.course.services.CourseService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -17,9 +19,9 @@ public class CourseController {
     private CourseService courseService;
 
     @PostMapping
-    public ResponseEntity<Object> create(@RequestBody CourseEntity courseEntity){
+    public ResponseEntity<Object> create(@RequestBody CreateCourseDTO dto){
         try{
-            var result = this.courseService.create(courseEntity);
+            var result = this.courseService.create(dto);
             return ResponseEntity.ok().body(result);
         } catch (Exception e){
             return ResponseEntity.badRequest().body(e.getMessage());
@@ -32,9 +34,9 @@ public class CourseController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> update(@PathVariable UUID id, @RequestBody CourseEntity courseEntity){
+    public ResponseEntity<Object> update(@PathVariable UUID id, @RequestBody UpdateCourseDTO dto){
         try{
-            return ResponseEntity.ok().body(this.courseService.update(id, courseEntity));
+            return ResponseEntity.ok().body(this.courseService.update(id, dto));
         } catch (Exception e){
             return ResponseEntity.badRequest().body(e.getMessage());
         }

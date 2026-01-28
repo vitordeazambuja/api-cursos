@@ -1,5 +1,6 @@
 package br.com.vitordeazambuja.apicursos.course.repositories;
 
+import br.com.vitordeazambuja.apicursos.course.dto.CourseResponseDTO;
 import br.com.vitordeazambuja.apicursos.course.entities.CourseEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
